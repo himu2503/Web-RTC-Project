@@ -12,7 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// PeerJS signaling server, mounted at /peerjs
+// PeerJS signaling server at /peerjs
 const peerServer = ExpressPeerServer(server, { debug: true, path: "/" });
 app.use("/peerjs", peerServer);
 
@@ -27,14 +27,16 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     socket.data = { roomId, peerId, name };
 
-    // notify others that a new user joined
+    // Notify others someone joined
     socket.to(roomId).emit("user-connected", { userId: peerId, name });
 
-    // chat
+    // Chat
     socket.on("message", (text) => {
-      io.to(roomId).emit("createMessage", { name, text });
+      const { name } = socket.data || {};
+      io.to(roomId).emit("createMessage", { name: name || "Guest", text: String(text || "").slice(0, 2000) });
     });
 
+    // Disconnect
     socket.on("disconnect", () => {
       const { roomId, peerId } = socket.data || {};
       if (roomId && peerId) {
