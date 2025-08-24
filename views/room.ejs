@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script> 
-    const ROOM_ID = "<% roomId %>"
-    </script>
-    <script defer src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-
-    <script src = "/socket.io/socket.io.js" defer> </script>
-    <script src = "script.js" defer></script>
-    <title>Document</title>
-    <style>
-        #video-grid{
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, 300px); 
-            grid-auto-rows: 300px; 
-
-        }
-
-        video{
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meeting Room</title>
+  <link rel="stylesheet" href="/style.css"/>
 </head>
-<body>
-    <div id = "video-grid"></div>
+<body class="room">
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="left">
+      <span class="logo">Video Meet</span>
+      <span class="badge">Room: <%= roomId %></span>
+      <button id="copy-link" class="btn small">Copy Link</button>
+    </div>
+    <div class="right">
+      <button id="mute-btn" class="btn">Mute</button>
+      <button id="camera-btn" class="btn">Camera Off</button>
+    </div>
+  </header>
+
+  <!-- Main layout -->
+  <main class="layout">
+    <section class="videos">
+      <div id="video-grid" class="video-grid"></div>
+    </section>
+
+    <aside class="chat">
+      <div class="chat-header">Chat</div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <form id="chat-form" class="chat-input">
+        <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off"/>
+        <button class="btn btn-primary" type="submit">Send</button>
+      </form>
+    </aside>
+  </main>
+
+  <!-- Name modal (required before joining) -->
+  <div id="join-modal" class="modal-backdrop">
+    <div class="modal">
+      <h2>Enter your name</h2>
+      <input id="name-input" class="input" type="text" placeholder="Your name"/>
+      <button id="join-btn" class="btn btn-primary full">Join Meeting</button>
+    </div>
+  </div>
+
+  <script>const ROOM_ID = "<%= roomId %>";</script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="/script.js"></script>
 </body>
-</html> 
+</html>

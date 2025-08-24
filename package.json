@@ -1,20 +1,16 @@
 {
+  "name": "video-meet",
+  "version": "1.0.0",
+  "description": "PeerJS + Socket.IO video meeting with chat",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^5.1.0",
+    "express": "^4.19.2",
     "peer": "^1.0.2",
-    "peerjs": "^1.5.5",
-    "socket.io": "^4.8.1",
-    "uuid": "^11.1.0"
-  },
-  "name": "web-rtc",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1"
+  }
 }

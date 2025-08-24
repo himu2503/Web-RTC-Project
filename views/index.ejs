@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create or Join Meeting</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body class="landing">
+  <div class="card">
+    <h1>Video Meet</h1>
+    <p class="muted">Create a new meeting or join with a code.</p>
+
+    <form action="/new" method="get" style="margin-bottom:10px;">
+      <button class="btn btn-primary full" type="submit">Generate New Meeting</button>
+    </form>
+
+    <div class="or">or</div>
+
+    <form id="join-form">
+      <input id="room-code" class="input" type="text" placeholder="Enter meeting code" required />
+      <button class="btn full" type="submit">Join Meeting</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('join-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = document.getElementById('room-code').value.trim();
+      if (code) window.location.href = '/' + code;
+    });
+  </script>
+</body>
+</html>
