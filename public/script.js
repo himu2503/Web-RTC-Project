@@ -119,7 +119,7 @@ async function startMediaAndJoin() {
       host: location.hostname,
       port: location.port || (location.protocol === "https:" ? 443 : 80),
       secure: location.protocol === "https:",
-      path: "/"
+      path: "/peerjs"
     });
 
     // Answer incoming calls
